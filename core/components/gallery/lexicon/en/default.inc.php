@@ -104,6 +104,7 @@ $_lang['gallery.zip_file'] = 'Zip File';
 $_lang['gallery.zip_upload'] = 'Zip Upload';
 $_lang['gallery.zip_upload_intro'] = 'Specify a zip file to upload for images. Gallery will unzip the file and place the images in it in this Album.';
 
+$_lang['gallery.compress_and_upload'] = 'Compress and upload';
 
 $_lang['area_backend'] = 'Backend';
 

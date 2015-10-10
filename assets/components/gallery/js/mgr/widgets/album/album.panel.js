@@ -297,6 +297,11 @@ GAL.panel.AlbumItems = function(config) {
                     ,scope: this
                 },'-',{
                     xtype: 'button'
+                    ,text: _('gallery.compress_and_upload')
+                    ,handler: this.compressAndUpload
+                    ,scope: this
+                },'-',{
+                    xtype: 'button'
                     ,text: _('gallery.multi_item_upload')
                     ,handler: this.uploadMultiItems
                     ,scope: this
@@ -367,6 +372,24 @@ Ext.extend(GAL.panel.AlbumItems,MODx.Panel,{
         this.windows.uploadItem.fp.getForm().reset();
         this.windows.uploadItem.setValues(r);
         this.windows.uploadItem.show(e.target);
+    }
+
+    ,compressAndUpload: function(btn,e) {
+        var r = {
+            album: this.config.album
+            ,active: true
+        };
+        if (!this.windows.compressUploadItem) {
+            this.windows.compressUploadItem = MODx.load({
+                xtype: 'gal-window-compress-upload'
+                ,listeners: {
+                    'success': {fn:function() { this.view.run(); },scope:this}
+                }
+            });
+        }
+        this.windows.compressUploadItem.fp.getForm().reset();
+        this.windows.compressUploadItem.setValues(r);
+        this.windows.compressUploadItem.show(e.target);
     }
 
     ,batchUpload: function(btn,e) {
