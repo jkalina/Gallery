@@ -297,11 +297,6 @@ GAL.panel.AlbumItems = function(config) {
                     ,scope: this
                 },'-',{
                     xtype: 'button'
-                    ,text: _('gallery.compress_and_upload')
-                    ,handler: this.compressAndUpload
-                    ,scope: this
-                },'-',{
-                    xtype: 'button'
                     ,text: _('gallery.multi_item_upload')
                     ,handler: this.uploadMultiItems
                     ,scope: this

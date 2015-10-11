@@ -33,6 +33,7 @@ class GalleryAlbumUpdateManagerController extends GalleryManagerController {
         $this->addJavascript($this->modx->getOption('manager_url').'assets/modext/core/modx.view.js');
         $this->addJavascript($this->gallery->config['jsUrl'].'mgr/utils/ddview.js');
         $this->addJavascript($this->gallery->config['jsUrl'].'mgr/utils/fileuploader.js');
+        $this->addJavascript($this->gallery->config['jsUrl'].'mgr/utils/jic.js');
         $this->addJavascript($this->gallery->config['jsUrl'].'mgr/widgets/album/album.items.view.js');
         $this->addJavascript($this->gallery->config['jsUrl'].'mgr/widgets/album/album.panel.js');
         $this->addLastJavascript($this->gallery->config['jsUrl'].'mgr/sections/album/update.js');
@@ -42,14 +43,14 @@ class GalleryAlbumUpdateManagerController extends GalleryManagerController {
         $this->checkForTinyMCE();
     }
     public function getTemplateFile() { return $this->gallery->config['templatesPath'].'album/update.tpl'; }
-    
+
     public function checkForTinyMCE() {
         /* If we want to use Tiny, we'll need some extra files. */
         $useTiny = $this->modx->getOption('gallery.use_richtext',$this->gallery->config,false);
         if ($useTiny) {
             $tinyCorePath = $this->modx->getOption('tiny.core_path',null,$this->modx->getOption('core_path').'components/tinymce/');
             if (file_exists($tinyCorePath.'tinymce.class.php')) {
-        
+
                 /* First fetch the gallery+tiny specific settings */
                 $cb1 =  $this->modx->getOption('gallery.tiny.buttons1',null,'undo,redo,selectall,pastetext,pasteword,charmap,separator,image,modxlink,unlink,media,separator,code,help');
                 $cb2 =  $this->modx->getOption('gallery.tiny.buttons2',null,'bold,italic,underline,strikethrough,sub,sup,separator,bullist,numlist,outdent,indent,separator,justifyleft,justifycenter,justifyright,justifyfull');
@@ -60,10 +61,10 @@ class GalleryAlbumUpdateManagerController extends GalleryManagerController {
                 $theme =  $this->modx->getOption('gallery.tiny.theme',null,'');
                 $bfs =  $this->modx->getOption('gallery.tiny.theme_advanced_blockformats',null,'');
                 $css =  $this->modx->getOption('gallery.tiny.theme_advanced_css_selectors',null,'');
-        
+
                 /** @var modAction $browserAction */
                 $browserAction = $this->modx->getObject('modAction',array('controller' => 'browser'));
-        
+
                 /* If the settings are empty, override them with the generic tinymce settings. */
                 $tinyProperties = array(
                     'accessibility_warnings' => false,
@@ -93,8 +94,8 @@ class GalleryAlbumUpdateManagerController extends GalleryManagerController {
                     'theme_advanced_statusbar_location' => 'bottom',
                     'theme_advanced_toolbar_align' => 'left',
                     'theme_advanced_toolbar_location' => 'top',
-        
-        
+
+
                     'height' => $this->modx->getOption('gallery.tiny.height',null,200),
                     'width' => $this->modx->getOption('gallery.tiny.width',null,'95%'),
                     'tiny.custom_buttons1' => (!empty($cb1)) ? $cb1 : $this->modx->getOption('tiny.custom_buttons1',null,'undo,redo,selectall,separator,pastetext,pasteword,separator,search,replace,separator,nonbreaking,hr,charmap,separator,image,modxlink,unlink,anchor,media,separator,cleanup,removeformat,separator,fullscreen,print,code,help'),
